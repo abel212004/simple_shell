@@ -1,12 +1,13 @@
 #include "shell.h"
 
+
 /**
- * _strtok_r - tokenizes a string
- * @string: string to be tokenized
- * @delim: delimiter to be used to tokenize the string
- * @save_ptr: pointer to be used to keep track of the next token
+ *_strtok_r - tokenizes a string
+ *@string: string to be tokenized
+ *@delim: delimiter to be used to tokenize the string
+ *@save_ptr: pointer to be used to keep track of the next token
  *
- * Return: The next available token
+ *Return: The next available token
  */
 char *_strtok_r(char *string, char *delim, char **save_ptr)
 {
@@ -48,45 +49,30 @@ char *_strtok_r(char *string, char *delim, char **save_ptr)
  */
 int _atoi(char *s)
 {
-	int sign = 1;
-	int n = 0;
+	unsigned int n = 0;
 
-	/* Skip any leading white space characters */
-	while (*s == ' ')
-	{
-		s++;
-	}
-
-	/* Check for a sign character */
-	if (*s == '-')
-	{
-		sign = -1;
-		s++;
-	}
-	else if (*s == '+')
-	{
-		s++;
-	}
-
-	/* Parse the remaining digits */
-	while (*s >= '0' && *s <= '9')
-	{
-		n = (n * 10) + (*s - '0');
-		s++;
-	}
-
-	return sign * n;
+	do {
+		if (*s == '-')
+			return (-1);
+		else if ((*s < '0' || *s > '9') && *s != '\0')
+			return (-1);
+		else if (*s >= '0'  && *s <= '9')
+			n = (n * 10) + (*s - '0');
+		else if (n > 0)
+			break;
+	} while (*s++);
+	return (n);
 }
 
 /**
  * _realloc - reallocates a memory block
  * @ptr: pointer to the memory previously allocated with a call to malloc
- * @prev_size: size of ptr
+ * @old_size: size of ptr
  * @new_size: size of the new memory to be allocated
  *
  * Return: pointer to the address of the new memory block
  */
-void *_realloc(void *ptr, unsigned int prev_size, unsigned int new_size)
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
 	void *temp_block;
 	unsigned int i;
@@ -96,7 +82,7 @@ void *_realloc(void *ptr, unsigned int prev_size, unsigned int new_size)
 		temp_block = malloc(new_size);
 		return (temp_block);
 	}
-	else if (new_size == prev_size)
+	else if (new_size == old_size)
 		return (ptr);
 	else if (new_size == 0 && ptr != NULL)
 	{
@@ -108,13 +94,14 @@ void *_realloc(void *ptr, unsigned int prev_size, unsigned int new_size)
 		temp_block = malloc(new_size);
 		if (temp_block != NULL)
 		{
-			for (i = 0; i < min(prev_size, new_size); i++)
+			for (i = 0; i < min(old_size, new_size); i++)
 				*((char *)temp_block + i) = *((char *)ptr + i);
 			free(ptr);
 			return (temp_block);
 		}
 		else
 			return (NULL);
+
 	}
 }
 
@@ -150,3 +137,5 @@ void remove_comment(char *input)
 	}
 	input[i] = '\0';
 }
+
+
