@@ -1,11 +1,10 @@
 #include "shell.h"
 
 /**
- * non_interactive - handles non_interactive mode
+ * non_interactive - Handles non-interactive mode
  *
  * Return: void
  */
-
 void non_interactive(void)
 {
 	char **current_command = NULL;
@@ -19,20 +18,28 @@ void non_interactive(void)
 			remove_newline(line);
 			remove_comment(line);
 			commands = tokenizer(line, ";");
+
 			for (i = 0; commands[i] != NULL; i++)
 			{
 				current_command = tokenizer(commands[i], " ");
+
 				if (current_command[0] == NULL)
 				{
 					free(current_command);
 					break;
 				}
+
 				type_command = parse_command(current_command[0]);
+
+				/* Initializer */
 				initializer(current_command, type_command);
+
 				free(current_command);
 			}
+
 			free(commands);
 		}
+
 		free(line);
 		exit(status);
 	}

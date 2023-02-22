@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- *_strtok_r - tokenizes a string
- *@string: string to be tokenized
- *@delim: delimiter to be used to tokenize the string
- *@save_ptr: pointer to be used to keep track of the next token
+ * _strtok_r - tokenizes a string
+ * @string: string to be tokenized
+ * @delim: delimiter to be used to tokenize the string
+ * @save_ptr: pointer to be used to keep track of the next token
  *
- *Return: The next available token
+ * Return: The next available token
  */
 char *_strtok_r(char *string, char *delim, char **save_ptr)
 {
@@ -51,13 +51,13 @@ int _atoi(char *s)
 	int sign = 1;
 	int n = 0;
 
-	// Skip any leading white space characters
+	/* Skip any leading white space characters */
 	while (*s == ' ')
 	{
 		s++;
 	}
 
-	// Check for a sign character
+	/* Check for a sign character */
 	if (*s == '-')
 	{
 		sign = -1;
@@ -68,7 +68,7 @@ int _atoi(char *s)
 		s++;
 	}
 
-	// Parse the remaining digits
+	/* Parse the remaining digits */
 	while (*s >= '0' && *s <= '9')
 	{
 		n = (n * 10) + (*s - '0');

@@ -1,12 +1,11 @@
 #include "shell.h"
 
 /**
- *env - prints the current_environnement
- *@tokenized_command: command entered
+ * env - Prints the current environment.
+ * @tokenized_command: Command entered.
  *
- *Return: void
+ * Return: Void.
  */
-
 void env(char **tokenized_command __attribute__((unused)))
 {
 	int i;
@@ -19,12 +18,11 @@ void env(char **tokenized_command __attribute__((unused)))
 }
 
 /**
- * quit - exits the shell
- * @tokenized_command: command entered
+ * quit - Exits the shell.
+ * @tokenized_command: Command entered.
  *
- * Return: void
+ * Return: Void.
  */
-
 void quit(char **tokenized_command)
 {
 	int num_token = 0, arg;
